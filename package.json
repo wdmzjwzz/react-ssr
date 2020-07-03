@@ -1,0 +1,47 @@
+{
+  "name": "react-ssr-0624",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@babel/core": "^7.10.3",
+    "@koa/router": "^9.0.1",
+    "@types/koa": "^2.11.3",
+    "@types/koa-static": "^4.0.1",
+    "@types/react": "^16.9.41",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-redux": "^7.1.9",
+    "@types/react-router-config": "^5.0.1",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/redux": "^3.6.0",
+    "axios": "^0.19.2",
+    "babel-loader": "^8.1.0",
+    "koa": "^2.13.0",
+    "koa-static": "^5.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-router-config": "^5.1.1",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.10.1",
+    "@babel/preset-typescript": "^7.10.1",
+    "nodemon": "^2.0.4",
+    "npm-run-all": "^4.1.5",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "scripts": {
+    "prebuild": "rm -rf ./dist/*",
+    "build": "npm-run-all build:* --parallel",
+    "build:client": "webpack --config ./build/webpack.client.js",
+    "build:server": "webpack --config ./build/webpack.server.js",
+    "serve": "cd dist && nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
