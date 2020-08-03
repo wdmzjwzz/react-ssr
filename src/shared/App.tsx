@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { renderRoutes } from "react-router-config";
 import routes from "./Routes";
-
+import "../less/common.less"
 const App = () => {
   return (
-    <div>
+    <div className="app">
       <ul>
         <li>
           <Link to="/">Home</Link>

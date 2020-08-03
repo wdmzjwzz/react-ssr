@@ -9,10 +9,14 @@ import { matchRoutes } from "react-router-config";
 import routes from "../shared/Routes";
 import { Provider } from "react-redux";
 import { createServerStore } from "../shared/store";
+import cheerio from "cheerio"
+import fs from "fs"
+import path from "path"
 
+const template = fs.readFileSync("./public/index.html", 'utf-8')
 const app = new Koa();
 const router = new Router();
-
+const $ = cheerio.load(template)
 app.use(staticServe("public"));
 
 router.get(["/", "/about"], async (ctx, next) => {
@@ -35,26 +39,9 @@ router.get(["/", "/about"], async (ctx, next) => {
           </StaticRouter>
         </Provider>
       );
-      ctx.body = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>React 服务器端渲染</title>
-    </head>
-    <style>
-        //...三方库
-    </style>
-    <body>
-        <div id="root">${content}</div>
-        <script>window.REDUX_STORE = ${JSON.stringify(
-          store.getState()
-        )}</script>
-        <script src="bundle.js"></script>
-    </body>
-    </html>
-    `;
+      $("#root").html(content)
+      $("body").append(`<script>window.REDUX_STORE = ${JSON.stringify(store.getState())}</script>`)
+      ctx.body = $.html()
     })
     .catch((item) => {
       ctx.body = "404.html";
